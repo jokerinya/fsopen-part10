@@ -21,3 +21,83 @@ Set up ESLint in your project so that you can perform linter checks by running `
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). 
 Note that exercises in this section should be submitted to part 1 in the exercise submission system.
+
+## Exercise 10.3: the reviewed repositories list
+In this exercise, we will implement the first version of the reviewed repositories list. The list should contain the repository's full name, description, language, number of forks, number of stars, rating average and number of reviews. Luckily React Native provides a handy component for displaying a list of data, which is the [FlatList](https://reactnative.dev/docs/flatlist) component.
+
+Implement components `RepositoryList` and `RepositoryItem` in the components directory's files `RepositoryList.jsx` and `RepositoryItem.jsx`. The `RepositoryList` component should render the `FlatList` component and `RepositoryItem` a single item on the list (hint: use the FlatList component's [renderItem](https://reactnative.dev/docs/flatlist#required-renderitem) prop). Use this as the basis for the `RepositoryList`.jsx file:
+
+```jsx
+import { FlatList, View, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  separator: {
+    height: 10,
+  },
+});
+
+const repositories = [
+  {
+    id: 'jaredpalmer.formik',
+    fullName: 'jaredpalmer/formik',
+    description: 'Build forms in React, without the tears',
+    language: 'TypeScript',
+    forksCount: 1589,
+    stargazersCount: 21553,
+    ratingAverage: 88,
+    reviewCount: 4,
+    ownerAvatarUrl: 'https://avatars2.githubusercontent.com/u/4060187?v=4',
+  },
+  {
+    id: 'rails.rails',
+    fullName: 'rails/rails',
+    description: 'Ruby on Rails',
+    language: 'Ruby',
+    forksCount: 18349,
+    stargazersCount: 45377,
+    ratingAverage: 100,
+    reviewCount: 2,
+    ownerAvatarUrl: 'https://avatars1.githubusercontent.com/u/4223?v=4',
+  },
+  {
+    id: 'django.django',
+    fullName: 'django/django',
+    description: 'The Web framework for perfectionists with deadlines.',
+    language: 'Python',
+    forksCount: 21015,
+    stargazersCount: 48496,
+    ratingAverage: 73,
+    reviewCount: 5,
+    ownerAvatarUrl: 'https://avatars2.githubusercontent.com/u/27804?v=4',
+  },
+  {
+    id: 'reduxjs.redux',
+    fullName: 'reduxjs/redux',
+    description: 'Predictable state container for JavaScript apps',
+    language: 'TypeScript',
+    forksCount: 13902,
+    stargazersCount: 52869,
+    ratingAverage: 0,
+    reviewCount: 0,
+    ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
+  },
+];
+
+const ItemSeparator = () => <View style={styles.separator} />;
+
+const RepositoryList = () => {
+  return (
+    <FlatList
+      data={repositories}
+      ItemSeparatorComponent={ItemSeparator}
+      // other props
+    />
+  );
+};
+
+export default RepositoryList;
+
+```
+
+_Do not alter_ the contents of the **repositories** variable, it should contain everything you need to complete this exercise. Render the `RepositoryList` component in the `Main` component which we previously added to the `Main.jsx` file. The reviewed repository list should roughly look something like this:
+![Exercise 10.3](./readmeimg/exercise10_3.png)
